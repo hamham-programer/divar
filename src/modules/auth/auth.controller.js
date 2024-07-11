@@ -26,20 +26,34 @@ class AuthController{
     async CheckOTP(req, res, next){
         try {
             const {mobile, code} = req.body
-            const tokens= await this.#service.checkOTP(mobile, code)
-            console.log(tokens);
-             return res.cookie(CookieNames.AccessToken, tokens, {
+            const {accessToken,refreshToken}= await this.#service.checkOTP(mobile, code)
+            console.log( accessToken);
+             return res.cookie(CookieNames.AccessToken, accessToken, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === NodeEnv.Production
             }).status(200).json({
                 message: AuthMessage.LoginSuccessfully,
-                tokens
+                accessToken,
+                refreshToken
             })
 
             
         } catch (error) {
             next(error)
             
+        }
+    }
+    async checkRefreshToken (req, res, next) {
+        try {
+            const {refreshToken: token} = req.body;
+            const {accessToken,refreshToken} = await this.#service.checkRefreshToken(token);
+            return res.status(200).json({
+                message: AuthMessage.LoginSuccessfully,
+                accessToken,
+                refreshToken
+            });
+        } catch (error) {
+            next(error);
         }
     }
 
