@@ -11,10 +11,13 @@ async function main(){
     const app = express()
     const port = process.env.PORT
     require("./src/config/mongoose.config")  
-    app.use(express.urlencoded({extended:true}))
-    app.use(cookieParser(process.env.COOKIE_SECRET_KEY))
     app.use(express.json())
-    SwaggerConfig(app)
+    app.use(express.urlencoded({extended:true}))
+    app.use(cors({
+        origin: "*"
+    }));
+/*     app.use(cookieParser(process.env.COOKIE_SECRET_KEY))
+ */    SwaggerConfig(app)
     app.use(mainRouter)
     NotFoundHandler(app)
     AllExceptionHandler(app)
