@@ -1,6 +1,13 @@
+import AddPost from "../components/template/AddPost"
+import PostList from "../components/template/PostList"
+
 function DashboardPage() {
+
   return (
-    <div>DashboardPage</div>
+    <div>
+      <AddPost />
+      <PostList />
+    </div>
   )
 }
 

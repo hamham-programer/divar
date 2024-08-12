@@ -20,5 +20,20 @@ const getProfile = async () => {
     }
 };
 
-export { getProfile };
+const getPosts = async () => {
+    try {
+        const token = getCookie("accessToken");
+        const response = await api.get("post/my", {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return response.data; // بازگرداندن داده‌های پست‌ها
+    } catch (error) {
+        console.error("Failed to fetch posts", error);
+        throw new Error("Failed to fetch posts");
+    }
+};
+
+
+
+export { getProfile, getPosts };
  

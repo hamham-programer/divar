@@ -29,7 +29,7 @@
  *  post:
  *      summary: create new category
  *      tags:
- *          -   category
+ *          -   Category
  *      requestBody:
  *          content:
  *              application/x-www-form-urlencoded:
@@ -49,7 +49,7 @@
  *  get:
  *      summary: get all category
  *      tags:
- *          -   category
+ *          -   Category
  *      responses:
  *          200:
  *              description: successfully
@@ -58,10 +58,10 @@
 /**
  * @swagger
  * /category/{id}:
- *  get:
+ *  delete:
  *      summary: get all category
  *      tags:
- *          -   category
+ *          -   Category
  *      parameters:
  *          -   in: path    
  *              name: id

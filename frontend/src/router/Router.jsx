@@ -10,7 +10,7 @@ import Loader from "../components/modules/Loader"
 
 function Router() {
     const {data, isLoading, error} = useQuery(["profile"], getProfile)
-    console.log({data, isLoading, error})
+    /* console.log({data, isLoading, error}) */
      if (isLoading) {
       return <Loader />;
   }
@@ -23,7 +23,7 @@ function Router() {
     <Route path="/" element={<HomePage />}/>
     <Route path="/dashboard" element={data ? <DashboardPage /> : <Navigate to="/auth" />}/>
     <Route path="/auth" element={data ? <Navigate to="/dashboard" /> : <AuthPage />}/>
-    <Route path="/admin" element={data && data.role === "USER" ? <AdminPage />: <Navigate to="/" />}/>
+    <Route path="/admin" element={data &&  data.role === "ADMIN" ? (<AdminPage />): (<Navigate to="/" />)}/>
     <Route path="*" element={<PageNotFound />}/>
   </Routes>
   )
